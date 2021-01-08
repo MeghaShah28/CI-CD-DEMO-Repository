@@ -36,10 +36,10 @@ jobs:
         working-directory: ./CICDDemo/
       - name: dotnet publish
         run: |
-          dotnet publish -c Release -o CICDDemo
+          dotnet publish
         working-directory: ./CICDDemo/
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
          name: my-artifact
-         path: ./CICDDemo/CICDDemo/
+         path: ./CICDDemo/bin/Debug/netcoreapp3.1/publish/
