@@ -34,25 +34,27 @@ jobs:
       - name: Build  
         run: dotnet build
         working-directory: ./CICDDemo/
-      - name: developement dotnet publish
-        if: github.ref == 'refs/heads/dev'
+        
+      - if: github.ref == 'refs/heads/dev'
+      - name: developement dotnet publish        
         run: |
           dotnet publish -c Debug 
         working-directory: ./CICDDemo/
         
-      - name: production dotnet publish
-        if: github.ref == 'refs/heads/master'
+      - if: github.ref == 'refs/heads/master'
+      - name: production dotnet publish        
         run: |
           dotnet publish -c Release
-      - name: Upload a Build Artifact of dvelopement
-        if: github.ref == 'refs/heads/dev'
+          
+      - if: github.ref == 'refs/heads/dev'
+      - name: Upload a Build Artifact of dvelopement        
         uses: actions/upload-artifact@v2
         with:
          name: my-artifact
          path: ./CICDDemo/bin/Debug/netcoreapp3.1/publish/
          
-      - name: Upload a Build Artifact of Production
-        if: github.ref == 'refs/heads/master'
+      - if: github.ref == 'refs/heads/master'
+      - name: Upload a Build Artifact of Production        
         uses: actions/upload-artifact@v2
         with:
          name: my-artifact
